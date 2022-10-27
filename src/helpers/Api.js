@@ -20,7 +20,7 @@ export const getImages = async (query, page) => {
       page,
     },
   });
-  return data.hits;
+  return data;
 };
 
 // ??++++++++++++++++++++++++++++++++++++++++++++++

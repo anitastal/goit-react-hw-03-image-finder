@@ -5,12 +5,14 @@ import { ModalForImage } from 'components/Modal/ModalForImage';
 import { Loader } from 'components/Loader/Loader';
 import css from './ImageGallery.module.css';
 import PropTypes from 'prop-types';
+import { Button } from '../Button/Button';
 
 export class ImageGallery extends Component {
   state = {
     images: [],
     activeImage: '',
     isLoading: false,
+    totalHits: 0,
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -21,7 +23,12 @@ export class ImageGallery extends Component {
         this.props.searchImageByName,
         this.props.page
       );
-      this.setState({ images: data, isLoading: false });
+      console.log(data);
+      this.setState({
+        images: data.hits,
+        isLoading: false,
+        totalHits: data.totalHits,
+      });
     }
     if (prevProps.page !== this.props.page && this.props.page !== 1) {
       this.setState({ isLoading: true });
@@ -30,8 +37,9 @@ export class ImageGallery extends Component {
         this.props.page
       );
       this.setState(prevState => ({
-        images: [...prevState.images, ...data],
+        images: [...prevState.images, ...data.hits],
         isLoading: false,
+        totalHits: data.totalHits,
       }));
     }
   }
@@ -47,6 +55,7 @@ export class ImageGallery extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <>
         {this.state.isLoading && <Loader />}
@@ -68,6 +77,9 @@ export class ImageGallery extends Component {
             toggleModal={this.toggleModal}
             largeImageURL={this.state.activeImage}
           />
+        )}
+        {this.state.totalHits > this.state.images.length && (
+          <Button onAddImg={this.props.handleMore} />
         )}
       </>
     );

@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Searchbar } from './Searchbar/Searchbar';
-import { Button } from './Button/Button';
 
 export class App extends Component {
   state = {
@@ -26,12 +25,10 @@ export class App extends Component {
         <ImageGallery
           searchImageByName={this.state.searchImageByName}
           page={this.state.page}
+          handleMore={this.handleMore}
         />
-        {this.state.searchImageByName && <Button onAddImg={this.handleMore} />}
-
         <ToastContainer autoClose={2000} />
       </div>
     );
   }
 }
-// {input && !loading && <Button handleClick={this.onClick}
