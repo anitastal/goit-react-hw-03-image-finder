@@ -7,13 +7,31 @@ export class ModalForImage extends Component {
   state = {
     isOpen: false,
   };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.onKeyDown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  onKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.toggleModal();
+    }
+  };
+
+  closeModal = e => {
+    if (e.currentTarget === e.target) {
+      this.props.toggleModal();
+    }
+  };
+
   render() {
-    const { largeImageURL, tags, toggleModal } = this.props;
+    const { largeImageURL, tags } = this.props;
     return (
-      <Backdrop
-        onClick={() => toggleModal()}
-        // onKeyDown={this.props.onKeyDown()}
-      >
+      <Backdrop onClick={this.closeModal}>
         <Modal>
           <img src={largeImageURL} alt={tags} />
         </Modal>

@@ -27,9 +27,11 @@ export class App extends Component {
           searchImageByName={this.state.searchImageByName}
           page={this.state.page}
         />
-        <Button onAddImg={this.handleMore} />
+        {this.state.searchImageByName && <Button onAddImg={this.handleMore} />}
+
         <ToastContainer autoClose={2000} />
       </div>
     );
   }
 }
+// {input && !loading && <Button handleClick={this.onClick}

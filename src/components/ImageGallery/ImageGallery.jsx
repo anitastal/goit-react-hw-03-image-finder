@@ -45,17 +45,6 @@ export class ImageGallery extends Component {
       this.setState({ activeImage: largeImageURL });
     }
   };
-  // onKeyDown = e => {
-  //   if (e.code === 'Escape') {
-  //     this.setState({
-  //       activeImage: '',
-  //     });
-  //   }
-  // };
-
-  // getActiveImage = () => {
-  //   return this.state.images.find(item => item.id === this.state.activeImage);
-  // };
 
   render() {
     return (
@@ -75,7 +64,6 @@ export class ImageGallery extends Component {
         </ul>
         {this.state.activeImage && (
           <ModalForImage
-            // onKeyDown={this.onKeyDown}
             tags={this.state.activeImage.tags}
             toggleModal={this.toggleModal}
             largeImageURL={this.state.activeImage}
